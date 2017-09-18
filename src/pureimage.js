@@ -140,11 +140,24 @@ exports.decodePNGFromStream = function(instream) {
                 var bitmap =  new Bitmap(this.width,this.height);
                 for(var i=0; i<bitmap.data.length; i++) {
                     bitmap.data[i] = this.data[i];
-                };
+                }
                 res(bitmap);
             });
-    })
+    });
 };
 
+exports.decodePNGFromStream = function(buf) {
+    return new Promise((res,rej)=>{
+        var png = new PNG();
+        png.parse(buf)
+            .on("parsed", function() {
+                var bitmap =  new Bitmap(this.width,this.height);
+                for(var i=0; i<bitmap.data.length; i++) {
+                    bitmap.data[i] = this.data[i];
+                }
+                res(bitmap);
+            });
+    });
+};
 
 exports.registerFont = text.registerFont;
