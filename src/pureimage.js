@@ -146,7 +146,7 @@ exports.decodePNGFromStream = function(instream) {
     });
 };
 
-exports.decodePNGFromStream = function(buf) {
+exports.decodePNGFromBuffer = function(buf) {
     return new Promise((res,rej)=>{
         var png = new PNG();
         png.parse(buf)
