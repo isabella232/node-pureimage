@@ -151,6 +151,15 @@ PImage.decodeJPEGFromStream(fs.createReadStream("tests/images/bird.jpg")).then((
     });
 ```
 
+Or, if you already have an image stored as a buffer, you can use:
+
+```
+PImage.decodeJPEGFromBuffer(buffer).then((img) => {
+    
+    // do stuff with the image here.
+    
+    })
+```
 
 
 Thanks!

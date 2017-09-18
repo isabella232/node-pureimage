@@ -54,6 +54,30 @@ exports.encodeJPEGToStream = function(img, outstream) {
     });
 };
 
+exports.decodeJPEGFromBuffer = function(buf) {
+    return new Promise((res,rej)=>{
+        try {
+            var rawImageData = JPEG.decode(buf);
+            var bitmap = new Bitmap(rawImageData.width, rawImageData.height);
+            for (var i = 0; i < rawImageData.width; i++) {
+                for (var j = 0; j < rawImageData.height; j++) {
+                    var n = (j * rawImageData.width + i) * 4;
+                    bitmap.setPixelRGBA_i(i, j,
+                        rawImageData.data[n + 0],
+                        rawImageData.data[n + 1],
+                        rawImageData.data[n + 2],
+                        rawImageData.data[n + 3]
+                    );
+                }
+            }
+            res(bitmap);
+        } catch (e) {
+            console.log(e);
+            rej(e);
+        }
+    });
+};
+
 exports.decodeJPEGFromStream = function(data) {
     return new Promise((res,rej)=>{
         try {
@@ -78,6 +102,30 @@ exports.decodeJPEGFromStream = function(data) {
                 }
                 res(bitmap);
             });
+        } catch (e) {
+            console.log(e);
+            rej(e);
+        }
+    });
+};
+
+exports.decodeJPEGFromBuffer = function(buf) {
+    return new Promise((res,rej)=>{
+        try {
+            var rawImageData = JPEG.decode(buf);
+            var bitmap = new Bitmap(rawImageData.width, rawImageData.height);
+            for (var i = 0; i < rawImageData.width; i++) {
+                for (var j = 0; j < rawImageData.height; j++) {
+                    var n = (j * rawImageData.width + i) * 4;
+                    bitmap.setPixelRGBA_i(i, j,
+                        rawImageData.data[n + 0],
+                        rawImageData.data[n + 1],
+                        rawImageData.data[n + 2],
+                        rawImageData.data[n + 3]
+                    );
+                }
+            }
+            res(bitmap);
         } catch (e) {
             console.log(e);
             rej(e);
