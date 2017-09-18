@@ -154,6 +154,7 @@ exports.decodePNGFromBuffer = function(buf) {
                 var bitmap =  new Bitmap(this.width,this.height);
                 for(var i=0; i<bitmap.data.length; i++) {
                     bitmap.data[i] = this.data[i];
+                    console.log(i);
                 }
                 res(bitmap);
             });
